@@ -1,0 +1,6 @@
+{
+    "dataworkspace.excludedProjects": [
+        "Ecomerce/Bronze/DDL/enter/enter.sqlproj",
+        "Ecomerce/Bronze/DDL/bronze_sql/enter.sqlproj"
+    ]
+}

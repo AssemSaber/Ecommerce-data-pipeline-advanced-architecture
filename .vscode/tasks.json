@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run bronze SQL",
+            "type": "shell",
+            "command": "sqlcmd",
+            "args": [
+                "-S",
+                "localhost",
+                "-d",
+                "Atos",
+                "-E",
+                "-i",
+                "H:\\Atos\\Ecomerce\\Bronze\\DDL\\bronze.sql"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Run silver SQL",
+            "type": "shell",
+            "command": "sqlcmd",
+            "args": [
+                "-S",
+                "localhost",
+                "-d",
+                "Atos",
+                "-E",
+                "-i",
+                "H:\\Atos\\Ecomerce\\Silver\\DDL\\silver.sql"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Run gold SQL",
+            "type": "shell",
+            "command": "sqlcmd",
+            "args": [
+                "-S",
+                "localhost",
+                "-d",
+                "Atos",
+                "-E",
+                "-i",
+                "H:\\Atos\\Ecomerce\\Gold\\DDL\\gold.sql"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
