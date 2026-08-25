@@ -75,3 +75,104 @@ The dataset includes several interconnected tables, allowing multi-dimensional a
 </details>
 
 
+<details>
+<summary><b>IMPLEMENTATION APPROACH</b></summary>
+
+<br>
+
+The pipeline was implemented using the following approach:
+
+### 1. Micro-Layer Architecture
+
+- Divided each data layer into smaller micro-layers or services.
+- Applied package customization across multiple micro-layers for:
+  - Data quality checks
+  - Data extraction from different sources
+  - Data loading to destination layers
+
+### 2. Architecture Benefits
+
+- **Decoupling:** Reduced dependencies between pipeline components.
+- **Abstraction:** Fully parameterized implementation without hard-coded values.
+- **Maintainability:** Logic can be modified without affecting the entire pipeline.
+- **Scalability:** New micro-layers can be added as the pipeline grows.
+- **Flexibility:** Supports different implementations and requirements across the data team.
+
+### 3. Incremental Loading Strategy
+
+#### Source to Bronze
+
+- Full extraction is performed to capture new records, updates, and deletions.
+
+#### Bronze to Silver
+
+- Identified data changes using merge operations.
+- Processed insertions and updates using a Delta-based merge.
+- Handled deleted records separately.
+- Added a `load_time` column to act as a watermark.
+
+#### Watermark-Based Processing
+
+- Used the watermark to identify incremental changes, including insertions, updates, and deletions.
+- Applied merge operations for inserts and updates.
+- Used a delete indicator to reflect deleted records in the Gold layer.
+
+### 4. Idempotent Processing
+
+The pipeline is designed to be **idempotent** by using **metadata-driven processing and merge operations**, ensuring that rerunning the pipeline does not create duplicate or inconsistent results.
+
+</details>
+
+
+
+<details>
+<summary><b>RESULTS AND INSIGHTS</b></summary>
+<br>
+  
+## The pipeline has the following  characteristics:
+- Scalability 
+- Abstracted functions
+- Decoupled
+- Incremental load
+- Idempotent 
+- Maintainable 
+  ### Before Any optimizations
+![DIMENSINOAL](images/before_optimi.png)
+  ### optimized order items using incremental load & batch size= 20k
+![DIMENSINOAL](images/after_optimi.png)
+
+</details>
+
+<details>
+<summary><b>HOW TO RUN</b></summary>
+<br>
+  
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/AssemSaber/Ecommerce-data-pipeline-advanced-architecture.git
+```
+### 2. Create New Folder Project
+```
+cd <project-folder>
+```
+### 3. Create a Virtual Environment
+```
+python -m venv venv
+```
+
+### 4. Activate the Virtual Environment
+##### Windows:
+```
+venv\Scripts\activate
+```
+##### Linux/macOS:
+```
+source venv/bin/activate
+```
+### 5. Install Dependencies
+```
+pip install -r requirements.txt
+```
+</details>
+
